@@ -1,3 +1,6 @@
+<?php
+    
+?>
 <html>
     <head>
         <title>test</title>
@@ -6,7 +9,7 @@
         <h1>Chat</h1>
 
         <div id="chat">
-        
+
         </div>
     </body>
 </html>

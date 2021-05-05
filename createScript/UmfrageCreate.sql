@@ -4,7 +4,9 @@ USE MEDTA12;
 
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usersname VARCHAR(255)
+    usersname VARCHAR(255),
+    email Text,
+    password TEXT
 );
 
 CREATE TABLE messages (

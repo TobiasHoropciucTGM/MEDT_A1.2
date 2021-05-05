@@ -17,17 +17,18 @@
                     <label>Password:</label><br>
                     <input class="form-control" type="password" name="password" required><br>
                     <button class="btn btn-light" type="submit" name="submit">Login</button><br>
-                    <?php 
-                        if(isset($_POST['submit']) && isset($_POST['username'])){
-                            $dbconnection = new PDO("mysql:host=localhost;dbname=medt","tobi", "tobi");
-                            $stmt = $dbconnection->prepare("SELECT password FROM user_accounts WHERE username=?");
+                    <?php
+                        include('config.php');
+                        if(isset($_POST['submit']) && isset($_POST['username']) && isset($_POST['password'])){
+                            $stmt = $pdo->prepare("SELECT password FROM users WHERE usersname=?");
                             $stmt->bindValue(1, $_POST['username']);
                             $stmt->execute();
                             $row = $stmt->fetch();
                             if($row != null){
                                 if(password_verify($_POST['password'], $row['password'])){
-                                    $_SESSION['username'] = $_POST['password'];
-                                    header("Location: index.php");
+                                    session_start();
+                                    $_SESSION['usersname'] = $_POST['username'];
+                                    header("Location: chat.php");
                                 }else{
                                     echo '<span class="text-danger">Wrong password!</span>';
                                 }

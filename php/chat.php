@@ -19,8 +19,6 @@
             <div id="chat-mes" class="">
                 <?php
                     include('config.php');
-                    session_start();
-                    $_SESSION['usersname'] = 'Sebi';
                     $mes = $pdo -> prepare("SELECT * FROM messages");
                     $mes -> execute();
                     $user = $pdo -> prepare("SELECT * FROM users WHERE id = ?");

@@ -2,39 +2,46 @@ DROP DATABASE IF EXISTS MEDTA12;
 CREATE DATABASE MEDTA12;
 USE MEDTA12;
 
-CREATE TABLE user (
+CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(255)
+    usersname VARCHAR(255)
 );
 
 CREATE TABLE messages (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user INT,
+    users INT,
     messageText TEXT,
-    FOREIGN KEY (user) REFERENCES user(id)
+    FOREIGN KEY (users) REFERENCES users(id)
 );
 
 
 CREATE TABLE poll(
    id INT PRIMARY KEY AUTO_INCREMENT,
-   question TEXT,
+   pollTitle TEXT,
    pollCreatorID int,
-   FOREIGN KEY (pollCreatorID) REFERENCES user(id),
+   FOREIGN KEY (pollCreatorID) REFERENCES users(id)
+);
+
+CREATE TABLE questions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    question TEXT,
+    pollID int,
+    FOREIGN KEY (pollID) REFERENCES poll(id)
 );
 
 CREATE TABLE voteGroups (
     id INT PRIMARY KEY AUTO_INCREMENT,
     pollID INT,
-    userID INT,
+    usersID INT,
     FOREIGN KEY (pollID) REFERENCES poll(id),
-    FOREIGN KEY (userID) REFERENCES user(id)
+    FOREIGN KEY (usersID) REFERENCES users(id)
 );
 
 CREATE TABLE votes (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    pollID INT,
-    userID,
+    questionID INT,
+    usersID INT,
     vote BOOLEAN,
-    FOREIGN KEY (pollID) REFERENCES poll(id),
-    FOREIGN KEY (userID) REFERENCES user(id)
+    FOREIGN KEY (questionID) REFERENCES questions(id),
+    FOREIGN KEY (usersID) REFERENCES users(id)
 );

@@ -29,14 +29,6 @@ CREATE TABLE questions (
     FOREIGN KEY (pollID) REFERENCES poll(id)
 );
 
-CREATE TABLE voteGroups (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    pollID INT,
-    usersID INT,
-    FOREIGN KEY (pollID) REFERENCES poll(id),
-    FOREIGN KEY (usersID) REFERENCES users(id)
-);
-
 CREATE TABLE votes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     questionID INT,

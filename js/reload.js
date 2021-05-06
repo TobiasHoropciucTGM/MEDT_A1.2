@@ -1,4 +1,4 @@
-setInterval(reload, 1000);
+setInterval(reload, 100);
 
 function reload() { 
     items = document.getElementById('chat-mes').childNodes;

@@ -1,10 +1,15 @@
 
 
+.scrollable-panel{
+    height: 75vh;
+    overflow:auto;
+    }
+
 #chat {
     
-    color: aqua;
+    color: gray;
 }
 
 #chat {
-    background-color: blue;
+    background-color: whitesmoke;
 }

@@ -1,6 +1,6 @@
-setInterval(reload, 100);
+setInterval(reload, 1000);
 
-function reload() {
+function reload() { 
     items = document.getElementById('chat-mes').childNodes;
     arr = [];
     if(items.length > 1) {
@@ -13,14 +13,29 @@ function reload() {
         $.post('../php/send.php?action=getMessage&latestId='+id, function(response){
                 response = jQuery.parseJSON(response);
                 if(response != false) {
-                    $("#chat-mes").append('<h2 id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                    var sessName = "<?php echo $_SESSION['usersname']?>";
+
+                    if(sessName.localeCompare(response[2])) {
+
+                        $("#chat-mes").append('<h2 style="text-align: right" id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                    } else {
+                        $("#chat-mes").append('<h2 style="text-align: left" id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                    }
+                    var messageBody = document.querySelector('#chat-mes');
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
                 }
         });
     } else {
         $.post('../php/send.php?action=getMessage&latestId=0', function(response){
             response = jQuery.parseJSON(response);
             if(response != false) {
-                $("#chat-mes").append('<h2 id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                if(sessName.localeCompare(response[2])) {
+                    $("#chat-mes").append('<h2 style="text-align: right" id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                } else {
+                    $("#chat-mes").append('<h2 style="text-align: left" id="'+response[1]+'">'+response[0] + ' von: ' + response[2]+'</h2>');
+                }
+                var messageBody = document.querySelector('#chat-mes');
+                messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
             }
         });
     }

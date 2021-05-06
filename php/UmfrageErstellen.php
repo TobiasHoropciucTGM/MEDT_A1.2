@@ -40,8 +40,9 @@
     </div>
     <?php 
     try {
-        $db = new PDO('mysql:host=localhost; dbname=test', "root" , "" );
-        $statement = $db->prepare("Insert INTO");
+        $db = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
+        $statement = $db->prepare("Insert INTO poll VALUES(?, ?, ?)");
+        $statement->execute(array(null, 'umfrage1' , 12332));
     } catch (PDOException $e) {
         echo "Error!: " . $e->getMessage() . "<br/>";
         

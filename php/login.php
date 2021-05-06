@@ -26,7 +26,7 @@
                             $row = $stmt->fetch();
                             if($row != null){
                                 if(password_verify($_POST['password'], $row['password'])){
-                                    $_SESSION['username'] = $_POST['password'];
+                                    $_SESSION['username'] = $_POST['username'];
                                     header("Location: index.php");
                                 }else{
                                     echo '<span class="text-danger">Wrong password!</span>';

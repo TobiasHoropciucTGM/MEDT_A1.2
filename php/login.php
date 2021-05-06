@@ -26,14 +26,9 @@
                             $row = $stmt->fetch();
                             if($row != null){
                                 if(password_verify($_POST['password'], $row['password'])){
-<<<<<<< HEAD
-                                    $_SESSION['username'] = $_POST['username'];
-                                    header("Location: index.php");
-=======
                                     session_start();
                                     $_SESSION['usersname'] = $_POST['username'];
                                     header("Location: chat.php");
->>>>>>> c593bd4bba403ef32463d4219241aca753c66631
                                 }else{
                                     echo '<span class="text-danger">Wrong password!</span>';
                                 }

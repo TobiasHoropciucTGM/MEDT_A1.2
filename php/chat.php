@@ -19,17 +19,15 @@
             <div id="chat-mes" class="">
                 <?php
                     include('config.php');
-                    session_start();
-                    $_SESSION['username'] = 'Sebi';
-                    $mes = $pdo -> prepare("SELECT * FROM nachrichten");
+                    $mes = $pdo -> prepare("SELECT * FROM messages");
                     $mes -> execute();
-                    $user = $pdo -> prepare("SELECT * FROM user WHERE id = ?");
+                    $user = $pdo -> prepare("SELECT * FROM users WHERE id = ?");
                     
                     while($message = $mes -> fetch()) {
-                        $userid = $message['user'];
+                        $userid = $message['users'];
                         $user -> execute(array($userid));
                         $userf = $user -> fetch();
-                        echo "<h2 id='".$message['id']."'>".$message['nachricht']." von: ".$userf['username']."</h2>";
+                        echo "<h2 id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
                     } 
 
                 ?>

@@ -1,3 +1,3 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=chat', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=medta12', 'root', '');
 ?>

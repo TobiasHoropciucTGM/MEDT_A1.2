@@ -19,12 +19,12 @@
                 <input class="form-control" type="password" name="password" required><br>
                 <button type="submit" name="submit" class="btn btn-light">Create Account</button><br>
                 <?php
+                include('config.php');
                 if (isset($_POST['submit'])) {
-                    $dbconnection = new PDO("mysql:host=localhost;dbname=medt", "tobi", "tobi");
-                    $uname_available = $dbconnection->prepare("SELECT count(*) AS count FROM user_accounts WHERE username = ?");
+                    $uname_available = $pdo->prepare("SELECT count(*) AS count FROM users WHERE usersname = ?");
                     $uname_available->bindValue(1, $_POST['username']);
                     $uname_available->execute();
-                    $email_available = $dbconnection->prepare("SELECT count(*) AS count FROM user_accounts WHERE email = ?");
+                    $email_available = $pdo->prepare("SELECT count(*) AS count FROM users WHERE email = ?");
                     $email_available->bindValue(1, $_POST['email']);
                     $email_available->execute();
                     $urow = $uname_available->fetch();
@@ -36,7 +36,7 @@
                     } else if ($erow['count'] == 1) {
                         echo '<span class="text-danger">Email already taken!</span>';
                     } else {
-                        $stmt = $dbconnection->prepare("INSERT INTO user_accounts (username,email,password) VALUES (?,?,?)");
+                        $stmt = $pdo->prepare("INSERT INTO users (usersname,email,password) VALUES (?,?,?)");
                         $stmt->bindValue(1, $_POST['username']);
                         $stmt->bindValue(2, $_POST['email']);
                         $stmt->bindValue(3, password_hash($_POST['password'], PASSWORD_DEFAULT));

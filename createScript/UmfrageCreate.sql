@@ -21,6 +21,7 @@ CREATE TABLE poll(
    id INT PRIMARY KEY AUTO_INCREMENT,
    pollTitle TEXT,
    pollCreatorID int,
+   public BOOLEAN,
    FOREIGN KEY (pollCreatorID) REFERENCES users(id)
 );
 

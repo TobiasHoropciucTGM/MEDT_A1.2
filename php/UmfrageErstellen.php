@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">MEDT A1.2</a>
+      <a class="navbar-brand" href="login.php">MEDT A1.2</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Chat</a></li>
@@ -27,26 +30,61 @@
     <div class="container-fluid">
         <div class="text-center">
             <form action="" method="post">
-                <label><p style="color: blue">Umfrage Titel</p></label><br>
-                <input type="text" name="uumfrageTitle"><br><br>
+                <label><h2 style="color: blue">Umfrage Titel</h2></label><br>
+                <input type="text" name="umfrageTitle"><br><br>
                 <label>1. Frage</label><br>
                 <input type="text" name="frage1"><br><br>
                 <label>2. Frage</label><br>
                 <input type="text" name="frage2"><br><br>
                 <label>3. Frage</label><br>
                 <input type="text" name="frage3"><br><br>
-                <input type="submit" value="Umfrage erstellen">
+                <input type="submit" name="submit" value="Umfrage erstellen">
             </form>
         </div>
     </div>
     <?php 
-        $db = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
-        $pollTitle = $_POST['umfrageTitle'];
-        $pollCreatorID;
-        $stmt = db->prepare("SELECT id FROM users WHERE usersname = ?");
-        stm
+      if(isset($_POST['submit'])){
+        $pdo = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE usersname = ?");
+        $stmt->bindValue(1, $_SESSION['usersname']);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $creatorID = $result['id'];
+        $stmt = $pdo->prepare("SELECT count(*) AS count FROM poll WHERE pollTitle = ? AND pollCreatorID = ?");
+        $stmt->bindValue(1,$_POST['umfrageTitle']);
+        $stmt->bindValue(2,$creatorID);
+        $stmt->execute();
+        $count =  $stmt->fetch();
+        if($count['count'] == 0){
+          $stmt = $pdo->prepare("INSERT INTO poll VALUES(null,?,?)");
+          $stmt->bindValue(1,$_POST['umfrageTitle']);
+          $stmt->bindValue(2, $creatorID);
+          $stmt->execute();
+          $frage = $_POST['frage1'];
 
-        $statement->execute(array(null, 'umfrage1' , 12332));
+          $stmt = $pdo->prepare("SELECT id as id FROM poll WHERE pollTitle = ? AND pollCreatorID = ?");
+          $stmt->bindValue(1,$_POST['umfrageTitle']);
+          $stmt->bindValue(2,$creatorID);
+          $stmt->execute();
+          $pollID = $stmt->fetch();
+          $stmt = $pdo->prepare("INSERT INTO questions VALUES(null,?,?)");
+          $stmt->bindValue(1,$_POST['frage1']);
+          $stmt->bindValue(2,$pollID['id']);
+          $stmt->execute();
+          $stmt->bindValue(1,$_POST['frage2']);
+          $stmt->bindValue(2,$pollID['id']);
+          $stmt->execute();
+          $stmt->bindValue(1,$_POST['frage3']);
+          $stmt->bindValue(2,$pollID['id']);
+          $stmt->execute();
+          unset($_POST['submit']);
+        }else{
+          ?><div class="container-fluid">
+              <div class="text-center" style="color:red; margin-top:10px">Sie haben schon eine Umfrage mit dem selben Titel.</div>
+            </div>
+          <?php  
+        }
+      }
 ?>
 </body>
 </html>

@@ -43,7 +43,7 @@
                         if(strcmp($userf['usersname'], $_SESSION['usersname']) == 0) {
                             echo "<h2 style='text-align:right' id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
                         } else {
-                            echo "<h2 id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                            echo "<h2 style='text-align:left' id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
                         }
                     } 
 

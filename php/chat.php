@@ -12,7 +12,6 @@
         
     </head>
     <body>
-        <h1>Chat</h1>
         
         <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -29,9 +28,10 @@
         </nav>
 
         <div id="chat" class="container">
-            <div id="chat-mes" class="">
+            <div id="chat-mes" class="scrollable-panel">
                 <?php
                     include('config.php');
+                    session_start();    
                     $mes = $pdo -> prepare("SELECT * FROM messages");
                     $mes -> execute();
                     $user = $pdo -> prepare("SELECT * FROM users WHERE id = ?");
@@ -40,16 +40,25 @@
                         $userid = $message['users'];
                         $user -> execute(array($userid));
                         $userf = $user -> fetch();
-                        echo "<h2 id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                        if(strcmp($userf['usersname'], $_SESSION['usersname']) == 0) {
+                            echo "<h2 style='text-align:right' id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                        } else {
+                            echo "<h2 id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                        }
                     } 
 
                 ?>
             </div>
-            <form action="" method="POST">
-                <textarea class="mesarea" id="messageArea" name="messageArea"></textarea>
-            </form>  
+            <div class="col-7">
+                <form style="text-align: center" class="col-5" action="" method="POST">
+                    <textarea style="text-align: center" class="mesarea" id="messageArea" name="messageArea"></textarea>
+                </form>
+            </div>
         </div>
-
+        <script>
+            var messageBody = document.querySelector('#chat-mes');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        </script> 
         <script src="../js/reload.js"></script>
         <script src="../js/message.js"></script>
     </body>

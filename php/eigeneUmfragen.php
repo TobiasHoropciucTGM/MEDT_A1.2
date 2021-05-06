@@ -14,7 +14,7 @@
 <body>
 
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid ">
         <?php 
             $pdo = new PDO('mysql:host=localhost;dbname=MEDTA12', 'root', '');        
             function getCreatorID(){
@@ -29,9 +29,9 @@
             while($row = $stmt->fetch()){
                 ?>
                     <div class="row m-1 justify-content-center">
-                        <div class="col-2 umfrageName column"><?=$row['pollTitle']?></div>
-                        <div class="col-2 column"><button class="optionen">Ergebnisse</button></div>
-                        <div class="col-2 column"><button class="optionen">veröffentlichen</button></div>
+                        <div class="col-5 umfrageName column"><?=$row['pollTitle']?></div>
+                        <div class="col-2 column text-center"><button class="optionen">Ergebnis</button></div>
+                        <div class="col-2 column text-center"><button class="optionen">veröffentlichen</button></div>
                     </div>
                 <?php
             }

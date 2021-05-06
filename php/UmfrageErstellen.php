@@ -19,7 +19,8 @@
     <ul class="nav navbar-nav">
       <li><a href="#">Chat</a></li>
       <li><a class="active"href="#">Umfrage Erstellen</a></li>
-      <li><a href="#">Umfragen</a></li>
+      <li><a href="#">eigene Umfragen</a></li>
+      <li><a href="#">alle Umfragen</a></li>
     </ul>
   </div>
 </nav>
@@ -27,7 +28,7 @@
         <div class="text-center">
             <form action="" method="post">
                 <label><p style="color: blue">Umfrage Titel</p></label><br>
-                <input type="text" name="utitle"><br><br>
+                <input type="text" name="uumfrageTitle"><br><br>
                 <label>1. Frage</label><br>
                 <input type="text" name="frage1"><br><br>
                 <label>2. Frage</label><br>
@@ -39,14 +40,13 @@
         </div>
     </div>
     <?php 
-    try {
         $db = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
-        $statement = $db->prepare("Insert INTO poll VALUES(?, ?, ?)");
+        $pollTitle = $_POST['umfrageTitle'];
+        $pollCreatorID;
+        $stmt = db->prepare("SELECT id FROM users WHERE usersname = ?");
+        stm
+
         $statement->execute(array(null, 'umfrage1' , 12332));
-    } catch (PDOException $e) {
-        echo "Error!: " . $e->getMessage() . "<br/>";
-        
-    }
 ?>
 </body>
 </html>

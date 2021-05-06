@@ -28,7 +28,7 @@
                                 if(password_verify($_POST['password'], $row['password'])){
                                     session_start();
                                     $_SESSION['usersname'] = $_POST['username'];
-                                    header("Location: chat.php");
+                                    header("Location: UmfrageErstellen.php");
                                 }else{
                                     echo '<span class="text-danger">Wrong password!</span>';
                                 }

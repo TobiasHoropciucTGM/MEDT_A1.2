@@ -22,7 +22,7 @@
     <ul class="nav navbar-nav">
       <li><a href="#">Chat</a></li>
       <li><a class="active"href="#">Umfrage Erstellen</a></li>
-      <li><a href="#">eigene Umfragen</a></li>
+      <li><a href="eigeneUmfragen.php">eigene Umfragen</a></li>
       <li><a href="#">alle Umfragen</a></li>
     </ul>
   </div>

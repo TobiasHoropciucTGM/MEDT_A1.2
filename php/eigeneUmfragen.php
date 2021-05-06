@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    $pdo = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,19 @@
     </div>
     <div class="container-fluid">
         <?php 
-            
+            function getCreatorID(){
+                $stmt = $pdo->prepare("SELECT id as id FROM users WHERE usersname= ?");
+                $stmt->execute(array($_SESSION['usersname']));
+                $id = $stmt->fetch();
+                return $id['id'];
+            }
+            $stmt = $pdo->prepare("SELECT pollTitle FROM poll WHERE pollCreatorID = ?");
+            $stmt->execute(array(getCreatorID()));
+            while($row = $stmt->fetch()){
+                ?>
+                <p><?=$row['pollTitle']?></p>
+                <?php
+            }
         ?>
     </div>
 </body>

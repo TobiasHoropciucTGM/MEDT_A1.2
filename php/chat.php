@@ -30,6 +30,7 @@
         <div id="chat" class="container">
             <div id="chat-mes" class="scrollable-panel">
                 <?php
+                
                     include('config.php');
                     session_start();    
                     $mes = $pdo -> prepare("SELECT * FROM messages");

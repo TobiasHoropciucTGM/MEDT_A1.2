@@ -14,7 +14,7 @@
         
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="container">
                 <div id="collapse navbar-collapse">
                     <ul class="navbar-nav">

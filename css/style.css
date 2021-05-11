@@ -3,7 +3,11 @@
 .scrollable-panel{
     height: 75vh;
     overflow:auto;
-    }
+}
+
+.usern {
+    color: rgb(150, 150, 150);
+}
 
 #chat {
     

@@ -42,9 +42,11 @@
                         $user -> execute(array($userid));
                         $userf = $user -> fetch();
                         if(strcmp($userf['usersname'], $_SESSION['usersname']) == 0) {
-                            echo "<h2 style='text-align:right' id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                            echo "<h2 style='text-align:right;margin-bottom:0;' id='".$message['id']."'>".$message['messageText']."</h2>";
+                            echo "<h4 style='text-align:right;margin-top:0;' class='usern'>".$userf['usersname']."</h4>";
                         } else {
-                            echo "<h2 style='text-align:left' id='".$message['id']."'>".$message['messageText']." von: ".$userf['usersname']."</h2>";
+                            echo "<h2 style='text-align:left;margin-bottom:0;' id='".$message['id']."'>".$message['messageText']."</h2>";
+                            echo "<h4 style='text-align:left;margin-top:0;' class='usern'>".$userf['usersname']."</h4>";
                         }
                     } 
 

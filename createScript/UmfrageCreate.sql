@@ -37,6 +37,7 @@ CREATE TABLE votes (
     questionID INT,
     usersID INT,
     vote BOOLEAN,
+    anonym BOOLEAN,
     FOREIGN KEY (questionID) REFERENCES questions(id),
     FOREIGN KEY (usersID) REFERENCES users(id)
 );

@@ -20,10 +20,10 @@
       <a class="navbar-brand" href="login.php">MEDT A1.2</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Chat</a></li>
+      <li><a href="chat.php">Chat</a></li>
       <li><a class="active"href="#">Umfrage Erstellen</a></li>
-      <li><a href="#">eigene Umfragen</a></li>
-      <li><a href="#">alle Umfragen</a></li>
+      <li><a href="eigeneUmfragen.php">eigene Umfragen</a></li>
+      <li><a href="umfragen.php">alle Umfragen</a></li>
     </ul>
   </div>
 </nav>

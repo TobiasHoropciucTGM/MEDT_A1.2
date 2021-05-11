@@ -20,6 +20,7 @@
                 <button type="submit" name="submit" class="btn btn-light">Create Account</button><br>
                 <?php
                 include('config.php');
+                global $pdo;
                 if (isset($_POST['submit'])) {
                     $uname_available = $pdo->prepare("SELECT count(*) AS count FROM users WHERE usersname = ?");
                     $uname_available->bindValue(1, $_POST['username']);

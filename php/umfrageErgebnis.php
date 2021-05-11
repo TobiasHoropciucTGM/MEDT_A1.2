@@ -18,7 +18,7 @@
             
         <?php 
             include('config.php');
-            echo $_SESSION['pollSelected'];
+            echo $_SESSION['pollResultSelected'];
 
         ?>
     </div>

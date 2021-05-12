@@ -21,7 +21,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link active" href="#">Chat</a></li>
                         <li class="nav-item"><a class="nav-link" href="UmfrageErstellen.php">Umfrage erstellen</a></li>
-                        <li class="nav-item"><a class="nav-link" href="eigeneUmfragen.php">Eigene Umfragen</a></li>
+                        <li class="nav-item"><a class="nav-link" href="eigeneUmfrage.php">Eigene Umfragen</a></li>
                         <li class="nav-item"><a class="nav-link" href="umfragen.php">Alle Umfragen</a></li>
                         <li class="nav-item"><a class="nav-link" href="logout.php">LogOut</a></li>
                     </ul>
@@ -36,8 +36,7 @@
                 <?php
                 
                     include('config.php');
-                    session_start();
-                    global $pdo;
+                    session_start();    
                     $mes = $pdo -> prepare("SELECT * FROM messages");
                     $mes -> execute();
                     $user = $pdo -> prepare("SELECT * FROM users WHERE id = ?");

@@ -14,6 +14,7 @@
         
     </head>
     <body>
+        <!-- Navigationsleiste -->
         <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="container">
                 <div id="collapse navbar-collapse">
@@ -27,7 +28,9 @@
                 </div>
             </div>
         </nav>
+        
 
+        <!--  -->
         <div id="chat" class="container">
             <div id="chat-mes" class="scrollable-panel" style="word-wrap: break-word;  ">
                 <?php
@@ -44,10 +47,10 @@
                         $userf = $user -> fetch();
                         if(strcmp($userf['usersname'], $_SESSION['usersname']) == 0) {
                             echo "<h2 style='text-align:right;margin-bottom:0;' id='".$message['id']."'>".$message['messageText']."</h2>";
-                            echo "<h4 class='usern' style='text-align:right;margin-top:0;' >".$userf['usersname']."</h4>";
+                            echo "<h5 class='usern' style='text-align:right;margin-top:0;' >".$userf['usersname']."</h5>";
                         } else {
                             echo "<h2 style='text-align:left;margin-bottom:0;' id='".$message['id']."'>".$message['messageText']."</h2>";
-                            echo "<h4 style='text-align:left;margin-top:0;' class='usern'>".$userf['usersname']."</h4>";
+                            echo "<h5 style='text-align:left;margin-top:0;' class='usern'>".$userf['usersname']."</h5>";
                         }
                     } 
 

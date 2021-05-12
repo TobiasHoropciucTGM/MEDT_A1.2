@@ -28,10 +28,10 @@ function reload() {
                     if(response != false) {
                         if(response[1] == response[0][i][2]) {
                             $("#chat-mes").append('<h2 style="text-align: right;margin-bottom:0" id="'+response[0][i][1]+'">'+response[0][i][0]+'</h2>');
-                            $("#chat-mes").append('<h4 style="text-align: right;margin-top:0;" class="usern">'+response[0][i][2]+'</h4>');
+                            $("#chat-mes").append('<h5 style="text-align: right;margin-top:0;" class="usern">'+response[0][i][2]+'</h5>');
                         } else {
                             $("#chat-mes").append('<h2 style="text-align: left;margin-bottom:0; class="usern" id="'+response[0][i][1]+'">'+response[0][i][0]+'</h2>');
-                            $("#chat-mes").append('<h4 style="text-align: left;margin-top:0;" class="usern">'+response[0][i][2]+'</h4>');
+                            $("#chat-mes").append('<h5 style="text-align: left;margin-top:0;" class="usern">'+response[0][i][2]+'</h5>');
                         }
                         var messageBody = document.querySelector('#chat-mes');
                         messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;

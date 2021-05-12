@@ -3,12 +3,15 @@
     include('config.php');
     if(isset($_REQUEST['action'])) {
         if($_REQUEST['action']=='sendMessage') {
-            $prepGetUser = $pdo -> prepare('SELECT * FROM users WHERE usersname = ?');
-            $prepGetUser -> execute(array($_SESSION['usersname']));
-            $getUser = $prepGetUser -> fetch();
-            $user = $getUser['id'];
-            $prepInsert = $pdo -> prepare('INSERT INTO messages (users, messageText) VALUES (?, ?)');
-            $prepInsert -> execute(array($user, $_REQUEST['message']));
+            if (!trim($_REQUEST['message']) == "") {
+                $prepGetUser = $pdo -> prepare('SELECT * FROM users WHERE usersname = ?');
+                $prepGetUser -> execute(array($_SESSION['usersname']));
+                $getUser = $prepGetUser -> fetch();
+                $user = $getUser['id'];
+                $prepInsert = $pdo -> prepare('INSERT INTO messages (users, messageText) VALUES (?, ?)');
+                $prepInsert -> execute(array($user, $_REQUEST['message']));
+            }
+            
         } else if($_REQUEST['action']=='getMessage') {
             $prepGetMessage = $pdo -> prepare('SELECT * FROM messages WHERE id > ?');
             $prepGetMessage -> execute(array($_REQUEST['latestId']));

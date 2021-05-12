@@ -12,7 +12,19 @@
 
 </head>
 <body>
-
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
+            <div id="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="chat.php">Chat</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="UmfrageErstellen.php">Umfrage erstellen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="eigeneUmfragen.php">Eigene Umfragen</a></li>
+                    <li class="nav-item"><a class="nav-link  active" href="umfragen.php">Alle Umfragen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">LogOut</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid">
         <?php 
             include('config.php');

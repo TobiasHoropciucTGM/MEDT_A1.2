@@ -16,22 +16,18 @@
     <div class="container-fluid">
         <?php 
             include('config.php');
-            $stmt = $pdo->prepare("SELECT pollTitle as polls FROM poll");
+            global $pdo;
+            $stmt = $pdo->prepare("SELECT pollTitle as poll , id as id FROM poll");
             $stmt->execute();
             while($row = $stmt->fetch()){
                 ?>
                 <div class="row justify-content-center reihe">
-                    <div class="col-5 umfrage"><?=$row['polls']?></div>
-                    <div class="col-1 option text-center">teilnehmen</div>
-                    <div class="col-2 option text-center">anonym teilnehmen</div>
-                    <div class="col-1 option text-center"><a href="umfragen.php?pollSelected=<?=$row['polls']?>">Ergebnisse</a></div>
+                    <div class="col-5 umfrage"><?=$row['poll']?></div>
+                    <div class="col-1 option text-center"><a href="vote.php?teilnehmen=<?=$row['id']?>">teilnehmen</a></div>
+                    <div class="col-2 option text-center"><a href="vote.php?teilnehmenA=<?=$row['id']?>">anonym teilnehmen</a> </div>
+                    <div class="col-1 option text-center"><a href="ergebnis.php?pollResultSelected=<?=$row['id']?>">Ergebnisse</a></div>
                 </div>
                 <?php
-            }
-            if(isset($_GET['pollSelected'])){
-                $_SESSION['pollSelected']=$_GET['pollSelected'];
-                echo $_SESSION['pollSelected'];
-                    header("Location: umfrageErgebnis.php");
             }
         ?>
     </div>

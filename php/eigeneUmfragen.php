@@ -16,24 +16,23 @@
 
     <div class="container-fluid ">
         <?php 
-            $pdo = new PDO('mysql:host=localhost;dbname=MEDTA12', 'root', '');        
-            function getCreatorID(){
-                GLOBAL $pdo;
-                $stmt = $pdo->prepare("SELECT id as id FROM users WHERE usersname= ?");
-                $stmt->execute(array($_SESSION['usersname']));
-                $id = $stmt->fetch();
-                return $id['id'];
-            }
-            $stmt = $pdo->prepare("SELECT pollTitle FROM poll WHERE pollCreatorID = ?");
-            $stmt->execute(array(getCreatorID()));
+            include('config.php');
+            include('voteFunc.php');
+            global $pdo;
+            $stmt = $pdo->prepare("SELECT pollTitle, id FROM poll WHERE pollCreatorID = ?");
+            $stmt->execute(array(getUserID()));
             while($row = $stmt->fetch()){
                 ?>
                     <div class="row m-1 justify-content-center">
                         <div class="col-5 umfrageName column"><?=$row['pollTitle']?></div>
                         <div class="col-2 column text-center"><button class="optionen">Ergebnis</button></div>
-                        <div class="col-2 column text-center"><button class="optionen">veröffentlichen</button></div>
+                        <div class="col-2 column text-center"><a href="eigeneUmfragen.php?veröffentlichen=true&poll=<?=$row['id']?>"><button class="optionen">veröffentlichen</button></a></div>
                     </div>
                 <?php
+            }
+            if(isset($_GET['veröffentlichen'])){
+                $stmt = $pdo->prepare("UPDATE poll SET public=1 WHERE id = ?");
+                $stmt->execute(array($_GET['poll']));
             }
         ?>
     </div>

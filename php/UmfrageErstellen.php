@@ -43,8 +43,9 @@
         </div>
     </div>
     <?php 
+      include('config.php');
+      global $pdo;
       if(isset($_POST['submit'])){
-        $pdo = new PDO('mysql:host=localhost; dbname=MEDTA12', "root" , "" );
         $stmt = $pdo->prepare("SELECT id FROM users WHERE usersname = ?");
         $stmt->bindValue(1, $_SESSION['usersname']);
         $stmt->execute();
@@ -56,13 +57,13 @@
         $stmt->execute();
         $count =  $stmt->fetch();
         if($count['count'] == 0){
-          $stmt = $pdo->prepare("INSERT INTO poll VALUES(null,?,?)");
+          $stmt = $pdo->prepare("INSERT INTO poll VALUES(null,?,?,?)");
           $stmt->bindValue(1,$_POST['umfrageTitle']);
           $stmt->bindValue(2, $creatorID);
+          $stmt->bindValue(3, 0);
           $stmt->execute();
-          $frage = $_POST['frage1'];
 
-          $stmt = $pdo->prepare("SELECT id as id FROM poll WHERE pollTitle = ? AND pollCreatorID = ?");
+          $stmt = $pdo->prepare("SELECT id FROM poll WHERE pollTitle = ? AND pollCreatorID = ?");
           $stmt->bindValue(1,$_POST['umfrageTitle']);
           $stmt->bindValue(2,$creatorID);
           $stmt->execute();
